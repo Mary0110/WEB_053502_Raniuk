@@ -1,4 +1,4 @@
-html {
+/*html {
   font-size: 14px;
 }
 
@@ -11,8 +11,23 @@ html {
 html {
   position: relative;
   min-height: 100%;
-}
+}*/
 
-body {
-  margin-bottom: 60px;
+header {
+    background-color: #343a40
+}
+footer {
+    background-color: #343a40;
+    width:100%;
+    bottom: 0px;
+    position:fixed;
+}
+.nav-color {
+    color: rgba(255,255,255,0.5)
+}
+ul {
+    list-style-type: upper-alpha
+}
+.navbar {
+    height: 45px;
 }
