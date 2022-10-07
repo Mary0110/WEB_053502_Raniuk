@@ -31,6 +31,6 @@ public class MenuViewComponent: ViewComponent
                 menuItem.Active= "active";
             }
         }
-        return View("Menu",_menuItems);
+        return View(_menuItems);
     }       
 }
