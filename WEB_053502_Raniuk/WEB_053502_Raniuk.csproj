@@ -18,6 +18,7 @@
   <ItemGroup>
     <None Remove="Controllers\" />
     <None Remove="Views\Home\" />
+    <None Remove="Views\Cart\**" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -27,8 +28,20 @@
   <ItemGroup>
     <Content Remove="wwwroot\images\avatar.jpeg" />
     <Content Remove="wwwroot\images\" />
+    <Content Remove="Views\Shared\Components\MenuComponent.razor" />
+    <Content Remove="Views\Cart\**" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\images\avatar.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\CartController.cs" />
+    <Compile Remove="Views\Cart\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\Cart\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Cart\Index.cshtml" />
   </ItemGroup>
 </Project>
