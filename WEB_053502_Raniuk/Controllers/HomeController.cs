@@ -27,6 +27,8 @@ namespace WEB_053502_Raniuk.Controllers
         public IActionResult Index()
         {
             ViewData["Text"] = "Лабораторная работа 2";
+            Console.WriteLine($"{User.Identity.IsAuthenticated} cccccccca");
+
             ViewData["Lst"] = new SelectList(_listDemo, "ListItemValue", "ListItemText");
             return View();
         }

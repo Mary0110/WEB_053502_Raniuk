@@ -11,38 +11,39 @@ public interface IDbInitializer
 public class DbInitializer : IDbInitializer
 {
     private readonly ApplicationDbContext _context;
-    /*private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly UserManager<ApplicationUser> _userManager;*/
+    private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
     public DbInitializer(
-        ApplicationDbContext context/*,
+        ApplicationDbContext context,
         UserManager<ApplicationUser> userManager,
-        RoleManager<IdentityRole> roleManager*/)
+        RoleManager<IdentityRole> roleManager)
     {
         _context = context;
-        /*_userManager = userManager;
-        _roleManager = roleManager;*/
+        _userManager = userManager;
+        _roleManager = roleManager;
     }
 
     public async void Initialize()
     {
-        //if (_context.Users.Any()) return;
+        if (_context.Users.Any()) return;
 
         //create database schema if none exists
-        //await _context.Database.EnsureCreatedAsync();
+        await _context.Database.EnsureCreatedAsync();
 
-        /*await _roleManager.CreateAsync(new IdentityRole("admin"));
-        await _roleManager.CreateAsync(new IdentityRole("user"));*/
+        await _roleManager.CreateAsync(new IdentityRole("admin"));
+        await _roleManager.CreateAsync(new IdentityRole("user"));
 
         //Create the default Admin & User accounts
         string password = "rootpass";
 
-       /* var admin = new ApplicationUser
+        var admin = new ApplicationUser
         {
             UserName = "root",
             Email = "root@mail.com",
             EmailConfirmed = false
         };
+        
         var user = new ApplicationUser
         {
             UserName = "user",
@@ -61,8 +62,8 @@ public class DbInitializer : IDbInitializer
         if (res2.Succeeded)
         {
             await _userManager.AddToRoleAsync(user, "user");
-        }*/
+        }
 
-        //await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
     }
 }

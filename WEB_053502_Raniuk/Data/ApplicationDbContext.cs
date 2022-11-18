@@ -11,11 +11,11 @@ namespace WEB_053502_Raniuk.Data
         {
         }
         
-        //public new DbSet<ApplicationUser> Users { get; set; }
+        public new DbSet<ApplicationUser> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<ApplicationUser>().ToTable("User");
+            modelBuilder.Entity<ApplicationUser>().ToTable("User");
             base.OnModelCreating(modelBuilder);
         }
     }
