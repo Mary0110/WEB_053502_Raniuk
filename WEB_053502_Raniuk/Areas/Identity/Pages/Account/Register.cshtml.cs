@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using WEB_053502_Raniuk.Entities;
 
 namespace WEB_053502_Raniuk.Areas.Identity.Pages.Account
@@ -99,6 +100,8 @@ namespace WEB_053502_Raniuk.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            public IFormFile Avatar { get; set; }
+
         }
 
 
@@ -115,7 +118,18 @@ namespace WEB_053502_Raniuk.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+               // Console.WriteLine("input{d}", Input.Avatar);
 
+                if (Input.Avatar != null)
+                {
+                    byte[] imageData = null;
+                    using (var binaryReader = new BinaryReader(Input.Avatar.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)Input.Avatar.Length);
+                    }
+                    user.Avatar = imageData;
+                }
+                
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);

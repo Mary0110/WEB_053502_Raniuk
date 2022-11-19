@@ -34,9 +34,7 @@ namespace WEB_053502_Raniuk.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            Console.WriteLine("wwwwww");
 
-            Console.WriteLine($"{User.Identity.IsAuthenticated} aaaaa");
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);
