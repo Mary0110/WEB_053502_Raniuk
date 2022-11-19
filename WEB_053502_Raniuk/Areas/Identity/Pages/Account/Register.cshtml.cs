@@ -100,6 +100,8 @@ namespace WEB_053502_Raniuk.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            
+            [Display(Name = "Your avatar")]
             public IFormFile Avatar { get; set; }
 
         }
