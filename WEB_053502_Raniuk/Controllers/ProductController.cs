@@ -9,30 +9,24 @@ public class ProductController : Controller
 {
     private readonly ApplicationDbContext _context;
     private readonly int _pageSize = 3;
-    private readonly List<Category> _categoryList;
 
     public ProductController(ApplicationDbContext context)
     {
         _context = context;
-        _categoryList = new List<Category>()
-        {
-            new Category { Id = 0, CategoryName = "All"},
-            new Category { Id = 1, CategoryName = "Films"},
-            new Category { Id = 2, CategoryName = "Series"}
-        };
+       
     }
     // GET
-    public async Task<IActionResult> Index(int? category, int pageNo = 1)
+    public async Task<IActionResult> Index(int? group, int pageNo = 1)
     {
         var filmsFiltered = _context.Films
-            .Where(d => !category.HasValue || d.CategoryId == category.Value);
+            .Where(d => !group.HasValue || d.CategoryId == group.Value);
 
-        ViewData["Categories"] = _categoryList;
-        if (category == 0) category = null;
+        ViewData["Categories"] = _context.Categories;
+        if (group == 0) group = null;
         var items = ListViewModel<Film>.GetModel(filmsFiltered, pageNo, _pageSize );
         
-        var currentGroup = category.HasValue
-            ? category.Value
+        var currentGroup = group.HasValue
+            ? group.Value
             : 0;
             
         ViewData["CurrentGroup"] = currentGroup;

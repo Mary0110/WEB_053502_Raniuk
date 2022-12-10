@@ -14,6 +14,7 @@ namespace WEB_053502_Raniuk.Data
         public new DbSet<ApplicationUser> Users { get; set; }
         
         public new DbSet<Film> Films { get; set; }
+        public new DbSet<Category> Categories { get; set; }
         
         /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

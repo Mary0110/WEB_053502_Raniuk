@@ -29,16 +29,17 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" 
+                   asp-action="Index" asp-controller="Product">all</a>
 
                 @foreach (var item in categories)
                 {
                     <a class="dropdown-item"
-                       asp-action="Index" 
+                       asp-action="Index"
                        asp-controller="Product"
-                       asp-route-category="@item.Id"
-                       asp-route-pageNo="1"
-                       >@item.CategoryName</a>
-                }               
+                       asp-route-group="@item.Id"
+                       asp-route-pageNo="1">@item.CategoryName</a>
+                }
             </div>
         </div>
     </div>
@@ -49,6 +50,11 @@
                 <partial name="_ListItemPartial" model="@item" />
             }
         </div>
+        <pager page-current="@Model.CurrentPage"
+        page-total="@Model.TotalPages"
+        action="Index"
+        controller="Product"
+        group-id="currentGroup"></pager>
     </div>
 </div>
 <div class="row">

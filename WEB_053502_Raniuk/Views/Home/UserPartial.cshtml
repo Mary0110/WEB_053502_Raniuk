@@ -10,14 +10,14 @@
         <div class="dropdown-toggle" id="dropdownMenuButton"
              data-bs-toggle="dropdown" aria-haspopup="true"
              aria-expanded="false">
-            <img src=@Url.Action("GetAvatar", "Avatar") width="30"
-                 alt="User" class="rounded"/>
+            <img img-controller="Avatar" img-action="GetAvatar" 
+                 width="30" alt="User" class="rounded" />
         </div>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <div class="dropdown-item-text">
-                <img src="@Url.Action("GetAvatar", "Avatar")" width="50"
-                     alt="User" class="rounded"/>
+                <img img-controller="Avatar" img-action="GetAvatar" 
+                     width="30" alt="User" class="rounded" />
                 @User.Identity.Name
 
             </div>

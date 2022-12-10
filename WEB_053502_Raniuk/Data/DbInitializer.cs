@@ -133,6 +133,19 @@ public class DbInitializer : IDbInitializer
             await _context.SaveChangesAsync();
         }
 
+        if (!_context.Categories.Any())
+        {
+
+
+            var cat1 = new Category {  CategoryName = "Films" };
+            var cat2 = new Category {  CategoryName = "Series" };
+            
+            await _context.Categories.AddAsync(cat1);
+            await _context.Categories.AddAsync(cat2);
+            
+            await _context.SaveChangesAsync();
+
+        }
 
     }
 }
