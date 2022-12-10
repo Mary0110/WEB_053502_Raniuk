@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WEB_053502_Raniuk.Entities;
 using WEB_053502_Raniuk.Data;
+using WEB_053502_Raniuk.Extensions;
 using WEB_053502_Raniuk.Models;
 
 namespace WEB_053502_Raniuk.Controllers;
@@ -16,6 +17,8 @@ public class ProductController : Controller
        
     }
     // GET
+    // [Route("Catalog")]
+    // [Route("Catalog/Page_{pageNo}")]
     public async Task<IActionResult> Index(int? group, int pageNo = 1)
     {
         var filmsFiltered = _context.Films
@@ -30,6 +33,8 @@ public class ProductController : Controller
             : 0;
             
         ViewData["CurrentGroup"] = currentGroup;
-        return View(items);
+        if (Request.IsAjaxRequest())
+            return PartialView("_ListPartial", ListViewModel<Film>.GetModel(filmsFiltered, pageNo, _pageSize));
+        return View(ListViewModel<Film>.GetModel(filmsFiltered, pageNo, _pageSize));
     }
 }

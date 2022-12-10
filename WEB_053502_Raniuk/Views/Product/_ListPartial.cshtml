@@ -1,0 +1,7 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ListViewModel<WEB_053502_Raniuk.Entities.Film>
+  
+@foreach (var item in Model)
+{
+    <partial name="_ListItemPartial" model="@item" />
+}
