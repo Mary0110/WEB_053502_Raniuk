@@ -49,9 +49,9 @@ builder.Services.AddRazorPages();
 var app = builder.Build();
 using(var scope = app.Services.CreateScope())
 {
-    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+    //var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
     // use dbInitializer
-    dbInitializer.Initialize();
+    //dbInitializer.Initialize();
 }
 if (!app.Environment.IsDevelopment())
 {

@@ -12,11 +12,17 @@ namespace WEB_053502_Raniuk.Data
         }
         
         public new DbSet<ApplicationUser> Users { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        
+        public new DbSet<Film> Films { get; set; }
+        
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ApplicationUser>().ToTable("User");
+            modelBuilder.Entity<Film>().ToTable("Film");
             base.OnModelCreating(modelBuilder);
-        }
+        }*/
+        
+        
+
     }
 }

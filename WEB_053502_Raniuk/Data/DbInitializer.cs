@@ -26,44 +26,104 @@ public class DbInitializer : IDbInitializer
 
     public async void Initialize()
     {
-        if (_context.Users.Any()) return;
+        if (!_context.Users.Any())
 
-        //create database schema if none exists
-        await _context.Database.EnsureCreatedAsync();
-
-        await _roleManager.CreateAsync(new IdentityRole("admin"));
-        await _roleManager.CreateAsync(new IdentityRole("user"));
-
-        //Create the default Admin & User accounts
-        string password = "rootpass";
-
-        var admin = new ApplicationUser
         {
-            UserName = "root",
-            Email = "root@mail.com",
-            EmailConfirmed = false
-        };
+            //create database schema if none exists
+            await _context.Database.EnsureCreatedAsync();
+
+            await _roleManager.CreateAsync(new IdentityRole("admin"));
+            await _roleManager.CreateAsync(new IdentityRole("user"));
+
+            //Create the default Admin & User accounts
+            string password = "rootpass";
+
+            var admin = new ApplicationUser
+            {
+                UserName = "root",
+                Email = "root@mail.com",
+                EmailConfirmed = false
+            };
+
+            var user = new ApplicationUser
+            {
+                UserName = "user",
+                Email = "user@mail.com",
+                EmailConfirmed = false
+            };
+            var res1 = await _userManager.CreateAsync(admin, password);
+            var res2 = await _userManager.CreateAsync(user, password);
+
+            if (res1.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(admin, "admin");
+            }
+
+            if (res2.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "user");
+            }
+
+            await _context.SaveChangesAsync();
+        }
         
-        var user = new ApplicationUser
-        {
-            UserName = "user",
-            Email = "user@mail.com",
-            EmailConfirmed = false
-        };
+         if (!_context.Films.Any())
+         {
+           
 
-        var res1 = await _userManager.CreateAsync(admin, password);
-        var res2 = await _userManager.CreateAsync(user, password);
+            var film2 = new Film
+            {
+                Id = 2,
+                Name = "GOT",
+                Description = "jsdn j",
+                Category = "Series",
+                CategoryId = 2,
+                Duration = 2,
+                Image = "got"
+            };
 
-        if (res1.Succeeded)
-        {
-            await _userManager.AddToRoleAsync(admin, "admin");
+            var film1 = new Film
+            {
+                Id = 1,
+                Name = "Breaking bad",
+                Description = "jsdn j",
+                Category = "Series",
+                CategoryId = 2,
+                Duration = 1,
+                Image= "breaking_bad"
+            };
+
+            var film3 = new Film
+            {
+                Id = 3,
+                Name = "The Sopranos",
+                Description = "jsdn j",
+                Category = "Series",
+                CategoryId = 2,
+                Duration = 3,
+                Image = "the_sopranos"
+            };
+
+            var film4 = new Film
+            {
+                Id = 4,
+                Name = "House of cards",
+                Description = "jsdn j",
+                Category = "Series",
+                CategoryId = 2,
+                Duration = 4,
+                Image = "house_of_cards"
+            };
+            
+            await _context.Films.AddAsync(film1);
+            await _context.Films.AddAsync(film2);
+            await _context.Films.AddAsync(film3);
+            await _context.Films.AddAsync(film4);
+
+            await _context.SaveChangesAsync();
+
         }
 
-        if (res2.Succeeded)
-        {
-            await _userManager.AddToRoleAsync(user, "user");
-        }
 
-        await _context.SaveChangesAsync();
     }
 }
