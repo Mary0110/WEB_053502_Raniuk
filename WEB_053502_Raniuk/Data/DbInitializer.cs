@@ -67,11 +67,9 @@ public class DbInitializer : IDbInitializer
             await _context.SaveChangesAsync();
         }
         
-         if (!_context.Films.Any())
-         {
-           
-
-            var film2 = new Film
+        if (!_context.Films.Any())
+        {
+             var film2 = new Film
             {
                 Id = 2,
                 Name = "GOT",
@@ -79,7 +77,7 @@ public class DbInitializer : IDbInitializer
                 Category = "Series",
                 CategoryId = 2,
                 Duration = 2,
-                Image = "got"
+                Image = "got.jpg"
             };
 
             var film1 = new Film
@@ -90,7 +88,7 @@ public class DbInitializer : IDbInitializer
                 Category = "Series",
                 CategoryId = 2,
                 Duration = 1,
-                Image= "breaking_bad"
+                Image= "breaking_bad.jpeg"
             };
 
             var film3 = new Film
@@ -101,7 +99,7 @@ public class DbInitializer : IDbInitializer
                 Category = "Series",
                 CategoryId = 2,
                 Duration = 3,
-                Image = "the_sopranos"
+                Image = "the_sopranos.jpg"
             };
 
             var film4 = new Film
@@ -112,16 +110,27 @@ public class DbInitializer : IDbInitializer
                 Category = "Series",
                 CategoryId = 2,
                 Duration = 4,
-                Image = "house_of_cards"
+                Image = "house_of_cards.jpg"
             };
             
+            var film5 = new Film
+            {
+                Id = 5,
+                Name = "Braveheart",
+                Description = "jsdn j",
+                Category = "Films",
+                CategoryId = 1,
+                Duration = 5,
+                Image = "braveheart.jpg"
+            };
+           
             await _context.Films.AddAsync(film1);
             await _context.Films.AddAsync(film2);
             await _context.Films.AddAsync(film3);
             await _context.Films.AddAsync(film4);
+            await _context.Films.AddAsync(film5);
 
             await _context.SaveChangesAsync();
-
         }
 
 

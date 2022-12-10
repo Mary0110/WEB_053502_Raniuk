@@ -27,7 +27,6 @@ public class ProductController : Controller
         var filmsFiltered = _context.Films
             .Where(d => !category.HasValue || d.CategoryId == category.Value);
 
-        //var list = _context.Films;
         ViewData["Categories"] = _categoryList;
         if (category == 0) category = null;
         var items = ListViewModel<Film>.GetModel(filmsFiltered, pageNo, _pageSize );
@@ -39,25 +38,4 @@ public class ProductController : Controller
         ViewData["CurrentGroup"] = currentGroup;
         return View(items);
     }
-    
-    // public IActionResult Create()
-    // {
-    //     return View();
-    // }
-    //
-    // // POST: Accessory/Create
-    // // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    // [HttpPost]
-    // [ValidateAntiForgeryToken]
-    // public async Task<IActionResult> Create([Bind("Id,Name,Description,Category,CategoryId,Image")] Film film)
-    // {
-    //     if (ModelState.IsValid)
-    //     {
-    //         _context.Add(film);
-    //         await _context.SaveChangesAsync();
-    //         return RedirectToAction(nameof(Index));
-    //     }
-    //     return View(film);
-    // }
 }
