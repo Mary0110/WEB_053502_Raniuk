@@ -36,6 +36,7 @@
     <None Remove="Views\Cart\**" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Pages" />
     <Folder Include="Controllers\" />
     <Folder Include="Views\Home\" />
     <Folder Include="wwwroot\images\" />
