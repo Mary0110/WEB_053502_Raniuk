@@ -29,8 +29,8 @@
             </div>
             <div class="form-floating">
                 <!--label>nnnnnnn</!--label-->
-                <label asp-for="Input.Avatar"></label>
-                <input asp-for="Input.Avatar" class="form-control" type="file" />
+                <label asp-for="Input.Avatar" class="custom-file-label"></label>
+                <input asp-for="Input.Avatar" class="custom-file form-control" type="file" />
             </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
@@ -70,3 +70,8 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+<script>
+$(document).ready(function () {
+  bsCustomFileInput.init()
+})
+</script>
