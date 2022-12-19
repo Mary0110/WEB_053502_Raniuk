@@ -31,7 +31,9 @@ namespace WEB_053502_Raniuk.Areas.Admin.Pages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Films == null || Film == null)
+          if (!ModelState.IsValid || 
+              _context.Films == null ||
+              Film == null)
             {
                 return Page();
             }

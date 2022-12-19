@@ -23,8 +23,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
     <PackageReference Include="Serilog" Version="2.12.1-dev-01587" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.1-dev-00896" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
     <PackageReference Include="SQLite" Version="3.13.0" />
@@ -33,19 +35,15 @@
   <ItemGroup>
     <None Remove="Controllers\" />
     <None Remove="Views\Home\" />
-    <None Remove="Views\Cart\**" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Pages" />
     <Folder Include="Controllers\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="wwwroot\images\avatar.jpeg" />
     <Content Remove="wwwroot\images\" />
     <Content Remove="Views\Shared\Components\MenuComponent.razor" />
-    <Content Remove="Views\Cart\**" />
     <Content Remove="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
@@ -61,11 +59,6 @@
     <Content Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="wwwroot\images\avatar.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Controllers\CartController.cs" />
-    <Compile Remove="Views\Cart\**" />
     <Compile Remove="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.cs" />
     <Compile Remove="Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml.cs" />
     <Compile Remove="Areas\Identity\Pages\Account\ResetPassword.cshtml.cs" />
@@ -81,9 +74,127 @@
     <Compile Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Remove="Views\Cart\**" />
-  </ItemGroup>
-  <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Cart\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\.DS_Store" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\favicon.ico" />
+    <_ContentIncludedByDefault Remove="wwwroot\htmlpage.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\.DS_Store" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\amsterdam.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\avatar.jpeg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\braveheart.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\breaking_bad.jpeg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\crimson_peak.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\gladiator.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\got.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\house_of_cards.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\joker.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\the_sopranos.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\bs-custom-file-input.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\bs-custom-file-input.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\bs-custom-file-input.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\bs-custom-file-input.min.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\LICENSE" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\all.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\all.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\brands.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\brands.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\fontawesome.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\fontawesome.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\regular.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\regular.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\solid.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\solid.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\svg-with-js.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\svg-with-js.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\v4-font-face.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\v4-font-face.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\v4-shims.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\v4-shims.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\v5-font-face.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\css\v5-font-face.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\all.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\all.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\brands.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\brands.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\conflict-detection.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\conflict-detection.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\fontawesome.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\fontawesome.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\regular.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\regular.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\solid.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\solid.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\v4-shims.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\js\v4-shims.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\sprites\brands.svg" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\sprites\regular.svg" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\sprites\solid.svg" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\webfonts\fa-brands-400.ttf" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\webfonts\fa-brands-400.woff2" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\webfonts\fa-regular-400.ttf" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\webfonts\fa-regular-400.woff2" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\webfonts\fa-solid-900.ttf" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\webfonts\fa-solid-900.woff2" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\webfonts\fa-v4compatibility.ttf" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome\webfonts\fa-v4compatibility.woff2" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\libman.json" />
   </ItemGroup>
 </Project>

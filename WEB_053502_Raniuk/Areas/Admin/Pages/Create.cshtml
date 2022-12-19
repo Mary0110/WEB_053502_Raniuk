@@ -39,10 +39,11 @@
                 <input asp-for="Film.Duration" class="form-control" />
                 <span asp-validation-for="Film.Duration" class="text-danger"></span>
             </div>
-           <div class="form-group">
-               <label asp-for="Film.Image" class="control-label"></label>
-               <input asp-for="Film.Image" class="form-control" type="file" />
-           </div>
+    <div class="form-floating">
+                <!--label>nnnnnnn</!--label-->
+                <label asp-for="Film.Image" class="custom-file-label"></label>
+                <input asp-for="Film.Image" class="custom-file form-control" type="file" />
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -58,5 +59,8 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
-<script
-    ></script>
+<script>
+$(document).ready(function () {
+  bsCustomFileInput.init()
+})
+</script>

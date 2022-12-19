@@ -1,8 +1,12 @@
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
 using WEB_053502_Raniuk.Data;
 using WEB_053502_Raniuk.Entities;
+using WEB_053502_Raniuk.Models;
+using WEB_053502_Raniuk.Services;
+using WEB_Raniuk_053502.Extensions;
+using Serilog.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +49,21 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(opt =>
+{
+    opt.Cookie.HttpOnly = true;
+    opt.Cookie.IsEssential = true;
+});
+builder.Services.AddScoped<Cart>(sp=> CartService.GetCart(sp));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Host.ConfigureLogging(logging =>
+{
+    logging.ClearProviders();
+    logging.AddFilter("Microsoft", LogLevel.None);
+});
 
+builder.Logging.AddFile("Logs/myapp-{Date}.txt");
 var app = builder.Build();
 using(var scope = app.Services.CreateScope())
 {
@@ -59,6 +77,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -74,25 +93,15 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseLogging();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-    endpoints.MapRazorPages();
-});
 app.Run();

@@ -9,11 +9,13 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-outline-info">
+        <span class="fa fa-plus-circle"> Добавить</span></a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Film[0].Name)
             </th>
@@ -21,51 +23,43 @@
                 @Html.DisplayNameFor(model => model.Film[0].Description)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Film[0].Description)
+            </th>
+           
+            <th>
                 @Html.DisplayNameFor(model => model.Film[0].Category)
-            </th>
-  
-            <th>
-                @Html.DisplayNameFor(model => model.Film[0].Duration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Film[0].Image)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Film) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                <img src="~/images/@item.Image" width="60" height="90">
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-            <td>
-                                        <a asp-page="./Edit" asp-route-id="@item.Id" style="text-decoration: none; ">
-                                            <i class="icon-edit" style="color:blue"></i>
-                                        </a>
-                                        |
-                                        <a asp-page="./Delete" asp-route-id="@item.Id" style="text-decoration: none; ">
-                                            <i class="icon-trash" style="color:red"></i>
-                                        </a>
-                                    </td>
-        </tr>
-}
+        @foreach (var item in Model.Film)
+        {
+            <tr>
+                <td>
+                    <img src="~/Images/@item.Image" alt="NoImage" width="50"/>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" 
+                       class="btn btn-outline-info">
+                            <span class="fa fa-pencil"></span></a> 
+                    <a asp-page="./Delete" asp-route-id="@item.Id" 
+                       class="btn btn-outline-danger">
+                            <span class="fa fa-close"></span></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

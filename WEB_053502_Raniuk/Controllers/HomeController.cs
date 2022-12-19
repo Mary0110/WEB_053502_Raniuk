@@ -26,7 +26,7 @@ namespace WEB_053502_Raniuk.Controllers
 
         public IActionResult Index()
         {
-            ViewData["Text"] = "Лабораторная работа 2";
+            ViewData["Text"] = "Лабораторная работа 8";
             ViewData["Lst"] = new SelectList(_listDemo, "ListItemValue", "ListItemText");
             return View();
         }

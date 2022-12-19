@@ -4,12 +4,17 @@ using WEB_053502_Raniuk.Models;
 
 namespace WEB_053502_Raniuk.ViewComponents;
 
-
-    public class CartViewComponent : ViewComponent
+public class CartViewComponent:ViewComponent
+{
+    private Cart _cart;
+    public CartViewComponent(Cart cart)
     {
-        public IViewComponentResult Invoke()
-        {
-            return View("Cart");
-        }
-        
+        _cart = cart;
     }
+    public IViewComponentResult Invoke()
+    {
+        //var cart = HttpContext.Session.Get<Cart>("cart")??new Cart();
+        return View(_cart);
+    }
+}
+    
